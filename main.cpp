@@ -3,7 +3,7 @@
 
 #include <iostream> 
 
-#include "BMPDrawer.h"
+#include "bmp_drawer.h"
 
 using std::cin;
 using std::cout;
@@ -21,7 +21,6 @@ int main(int argc, char** argv)
 
 	for (size_t i = 1; i < argc; ++i)
 	{
-		cout << endl << "Opening file: " << argv[i] << endl;
 		if (bmpDrawer.openBMP(argv[i]))
 		{
 			bmpDrawer.displayBMP();

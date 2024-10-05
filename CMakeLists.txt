@@ -12,7 +12,7 @@ endif()
 project ("drawBMP")
 
 # Добавьте источник в исполняемый файл этого проекта.
-add_executable (drawBMP "main.cpp" "BMPDrawer.cpp")
+add_executable (drawBMP "main.cpp" "bmp_drawer.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET drawBMP PROPERTY CXX_STANDARD 20)

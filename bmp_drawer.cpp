@@ -1,6 +1,6 @@
-#include "BMPDrawer.h"
+#include "bmp_drawer.h"
 
-BMPDrawer::BMPDrawer() : file_header_({ NULL }), info_header_({ NULL }), data_(nullptr), alignment_degree_(2), is_open_(false) {};
+BMPDrawer::BMPDrawer() : file_header_({ NULL }), info_header_({ NULL }), data_(nullptr), kAlignmentDegree(2), is_open_(false) {};
 
 BMPDrawer::~BMPDrawer()
 {
@@ -11,6 +11,8 @@ bool BMPDrawer::openBMP(const std::string& fileName)
 {
 	if (is_open_) // Если другой файл был открыт, но не был закрыт
 		closeBMP(); 
+
+	std::cout << std::endl << "Opening file: " << fileName << std::endl;
 
 	std::ifstream input(fileName, std::ios::binary);
 
@@ -57,7 +59,7 @@ bool BMPDrawer::openBMP(const std::string& fileName)
 	}
 
 	size_t significant_row_size = info_header_.biWidth * (info_header_.biBitCount >> 3);
-	size_t round_row_size = ((significant_row_size + (1LL << alignment_degree_) - 1) >> alignment_degree_) << alignment_degree_;
+	size_t round_row_size = ((significant_row_size + (1LL << kAlignmentDegree) - 1) >> kAlignmentDegree) << kAlignmentDegree;
 
 	size_t data_size = info_header_.biHeight * round_row_size;
 	data_ = new (std::nothrow) unsigned char[data_size];
@@ -85,7 +87,7 @@ void BMPDrawer::displayBMP() const
 	}
 
 	size_t significant_row_size = info_header_.biWidth * (info_header_.biBitCount >> 3);
-	size_t round_row_size = ((significant_row_size + (1LL << alignment_degree_) - 1) >> alignment_degree_) << alignment_degree_;
+	size_t round_row_size = ((significant_row_size + (1LL << kAlignmentDegree) - 1) >> kAlignmentDegree) << kAlignmentDegree;
 
 	for (int64_t i = info_header_.biHeight - 1; i >= 0; --i)
 	{
