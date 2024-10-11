@@ -9,8 +9,8 @@ BMPDrawer::~BMPDrawer()
 
 bool BMPDrawer::openBMP(const std::string& fileName)
 {
-	if (is_open_) // Если другой файл был открыт, но не был закрыт
-		closeBMP(); 
+	if (is_open_) // РµСЃР»Рё РґСЂСѓРіРѕР№ С„Р°Р№Р» Р±С‹Р» РѕС‚РєСЂС‹С‚, РЅРѕ РЅРµ Р±С‹Р» Р·Р°РєСЂС‹С‚
+		closeBMP();
 
 	std::cout << std::endl << "Opening file: " << fileName << std::endl;
 
@@ -117,7 +117,7 @@ void BMPDrawer::displayBMP() const
 
 bool BMPDrawer::closeBMP()
 {
-	delete data_;
+	delete[] data_;
 	data_ = nullptr;
 	is_open_ = false;
 	return true;
